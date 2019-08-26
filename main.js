@@ -17,7 +17,18 @@ let playerDrawArgsNames = {
     h: 3
 }
 
-let playerMoveGap = 10;
+let ballDrawArguments = [100, 75, 12, 0, 2 * Math.PI];
+let ballDrawArgNames = {
+    x:  0,
+    y:  1,
+    r:  2,
+    as: 3,
+    ae: 4
+}
+
+let playerMoveGap = 20;
+
+let ballVelocity = {x: 0, y: 0};
 
 window.onload = () => {
         canvas = document.getElementById('GameBoard');
@@ -34,14 +45,26 @@ function frame() {
 
     window.requestAnimationFrame(frame);
 }
+
+function applyGravityToBall() {
+    ballVelocity.y += 0.2;
+}
+
+function moveBall() {
+    ballDrawArguments[ballDrawArgNames.x] += Math.floor(ballVelocity.x);
+    ballDrawArguments[ballDrawArgNames.y] += Math.floor(ballVelocity.y);
+}
+
 function update() {
+    applyGravityToBall();
+    moveBall();
     switch (currentKeyPress) {
         case KeyboardKeyCodes.left:
-            move(KeyboardKeyCodes.left);
+            movePlayer(KeyboardKeyCodes.left);
             currentKeyPress = '';
             break;
         case KeyboardKeyCodes.right:
-            move(KeyboardKeyCodes.right);
+            movePlayer(KeyboardKeyCodes.right);
             currentKeyPress = '';
             break;
     }
@@ -50,6 +73,7 @@ function update() {
 function draw() {
     clearCanvas();
     drawPlayer('black', playerDrawArguments);
+    drawBall('black', ballDrawArguments);
 }
 
 function clearCanvas() {
@@ -63,7 +87,15 @@ function drawPlayer(color, drawArguments) {
     ctx.stroke();
 }
 
-function move(direction) {
+function drawBall(color, drawArguments) {
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.arc(...drawArguments);
+
+    ctx.stroke();
+}
+
+function movePlayer(direction) {
     switch (direction) {
         case KeyboardKeyCodes.left:
             if (playerDrawArguments[playerDrawArgsNames.x] >= canvas.offsetLeft)
