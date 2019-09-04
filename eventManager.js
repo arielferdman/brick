@@ -5,17 +5,24 @@ class EventManager extends Object {
         this.eventData = null;
         this.player = null;
         this.input = null;
+        this.signals = [];
     }
 
     update() {
+        this.processSignals();
+    }
 
+    processSignals() {
+        this.signals.forEach((item) => {
+            switch (item.name) {
+                case 'keypress':
+                    this.player.receiveSignal(new Signal());
+                    break;
+            }
+        });
     }
 
     draw() {
-
-    }
-
-    receiveSignal() {
 
     }
 

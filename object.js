@@ -2,6 +2,7 @@ class Object {
 
     constructor() {
         this.name = null;
+        this.signals = [];
     }
 
     update(lastStepTime) {
@@ -12,8 +13,8 @@ class Object {
 
     }
 
-    receiveSignal(signalData) {
-
+    receiveSignal(signal) {
+        this.signals.push(signal);
     }
 
 }

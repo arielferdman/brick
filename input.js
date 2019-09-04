@@ -13,20 +13,14 @@ class Input extends Object {
         document.addEventListener('keyup', this.keyRelease);
     }
 
-    update() {
-
-    }
-
-    draw() {
-
-    }
-
-    receiveSignal(signalData) {
+    receiveSignal(signal) {
 
     }
 
     keypress(event) {
         this.eventData['keyCode'] = event.code;
+        let signal = new Signal(enums.signals.keypress, event.code);
+        eventManager.receiveSignal(signal);
     }
 
     keyRelease() {

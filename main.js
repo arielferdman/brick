@@ -1,4 +1,4 @@
-let canvas,ctx,objects,eventManager;
+let canvas,ctx,objects,eventManager,enums;
 
 let ballDrawArguments = [100, 75, 12, 0, 2 * Math.PI];
 let ballDrawArgNames = {
@@ -45,9 +45,14 @@ function update() {
 }
 
 function createObjectsByOrder() {
+    createEnums();
     createEventManager();
     createInput();
     createPlayer();
+}
+
+function createEnums() {
+    enums = new Enums();
 }
 
 function createEventManager() {

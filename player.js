@@ -9,6 +9,8 @@ class Player extends Object {
         this.h = dimensions.h;
         this.color = color;
         this.moveGap = 20;
+        this.moveFlag = false;
+        this.signals = [];
     }
 
     update() {
@@ -40,10 +42,6 @@ class Player extends Object {
     moveLeft() {
         if (this.x >= canvas.offsetLeft)
             this.x -= this.moveGap;
-    }
-
-    receiveSignal(signalData) {
-
     }
 }
 
