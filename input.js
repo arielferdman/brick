@@ -9,8 +9,8 @@ class Input extends Object {
             down: 'Numpad2'
         };
         this.currentKeyPress = '';
-        document.addEventListener('keypress', keypress);
-        document.addEventListener('keyup', keyRelease);
+        document.addEventListener('keypress', this.keypress);
+        document.addEventListener('keyup', this.keyRelease);
     }
 
     update() {
@@ -30,6 +30,6 @@ class Input extends Object {
     }
 
     keyRelease() {
-        currentKeyPress = '';
+        this.currentKeyPress = '';
     }
 }

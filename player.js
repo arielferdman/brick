@@ -2,6 +2,7 @@ class Player extends Object {
 
     constructor(position, dimensions, color) {
         super();
+        this.name = 'player';
         this.x = position.x;
         this.y = position.y;
         this.w = dimensions.w;

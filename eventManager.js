@@ -1,6 +1,7 @@
 class EventManager extends Object {
     constructor() {
         super();
+        this.name = 'eventManager';
         this.eventData = null;
         this.player = null;
         this.input = null;

@@ -13,10 +13,10 @@ let ballVelocity = {x: 0, y: 0};
 
 window.onload = () => {
         canvas = document.getElementById('GameBoard');
-        canvas.width = 801;
+        canvas.width = 800;
         canvas.height = 800;
         ctx = canvas.getContext('2d');
-
+        createObjectsByOrder();
         frame();
 };
 
@@ -39,7 +39,15 @@ function moveBall() {
 function update() {
     applyGravityToBall();
     moveBall();
+    objects.forEach((item) => {
+        item.update();
+    });
+}
 
+function createObjectsByOrder() {
+    createEventManager();
+    createInput();
+    createPlayer();
 }
 
 function createEventManager() {
@@ -48,21 +56,24 @@ function createEventManager() {
 
 function createInput() {
     let input = new Input();
+    eventManager.registerObject(input);
     objects.push(input);
-
 }
 
 function createPlayer() {
     let position = {x: 30, y: 700};
     let dimensions = {w: 140, h: 30};
     let color = 'black';
-    objects.push(new Player(position, dimensions, color));
+    let player = new Player(position, dimensions, color);
+    eventManager.registerObject(player);
+    objects.push(player);
 }
 
 function draw() {
     clearCanvas();
-    drawPlayer('black', playerDrawArguments);
-    drawBall('black', ballDrawArguments);
+    objects.forEach((item) => {
+        item.draw();
+    });
 }
 
 function clearCanvas() {
