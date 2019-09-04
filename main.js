@@ -1,13 +1,4 @@
-let canvas,ctx,objects;
-
-let KeyboardKeyCodes = {
-    left: 'Numpad4',
-    up: 'Numpad8',
-    right: 'Numpad6',
-    down: 'Numpad2'
-}
-
-let currentKeyPress = '';
+let canvas,ctx,objects,eventManager;
 
 let ballDrawArguments = [100, 75, 12, 0, 2 * Math.PI];
 let ballDrawArgNames = {
@@ -48,16 +39,24 @@ function moveBall() {
 function update() {
     applyGravityToBall();
     moveBall();
-    switch (currentKeyPress) {
-        case KeyboardKeyCodes.left:
-            movePlayer(KeyboardKeyCodes.left);
-            currentKeyPress = '';
-            break;
-        case KeyboardKeyCodes.right:
-            movePlayer(KeyboardKeyCodes.right);
-            currentKeyPress = '';
-            break;
-    }
+
+}
+
+function createEventManager() {
+    eventManager = new EventManager();
+}
+
+function createInput() {
+    let input = new Input();
+    objects.push(input);
+
+}
+
+function createPlayer() {
+    let position = {x: 30, y: 700};
+    let dimensions = {w: 140, h: 30};
+    let color = 'black';
+    objects.push(new Player(position, dimensions, color));
 }
 
 function draw() {
@@ -86,8 +85,7 @@ function keyRelease() {
     currentKeyPress = '';
 }
 
-document.addEventListener('keypress', keypress);
-document.addEventListener('keyup', keyRelease);
+
 
 
 

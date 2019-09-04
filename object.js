@@ -1,7 +1,7 @@
 class Object {
 
     constructor() {
-
+        this.name = null;
     }
 
     update(lastStepTime) {
@@ -9,6 +9,10 @@ class Object {
     }
 
     draw() {
+
+    }
+
+    receiveSignal(signalData) {
 
     }
 
