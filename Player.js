@@ -3,7 +3,6 @@ class Player extends GameObject {
 
     constructor(position, dimensions, color) {
         super();
-        this.name = SignalManager.objectNames.player;
         this.x = position.x;
         this.y = position.y;
         this.w = dimensions.w;

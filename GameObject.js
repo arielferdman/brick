@@ -1,7 +1,6 @@
 class GameObject {
 
     constructor() {
-        this.name = SignalManager.objectNames.object;
 
     }
 

@@ -21,7 +21,7 @@ class Que {
             return null;
         let head = this.head;
         this.head = this.head.next;
-        return head;
+        return head.element;
     }
 
     empty() {

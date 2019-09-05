@@ -1,7 +1,6 @@
 class Input extends GameObject {
     constructor() {
         super();
-        this.name = SignalManager.objectNames.input;
         this.KeyboardKeyCodes = {
             left: 'Numpad4',
             up: 'Numpad8',

@@ -24,22 +24,21 @@ SignalManager.signalTypes = {
 };
 
 SignalManager.objectNames = {
-    object: 0,
-    player: 1,
-    ball: 2,
-    input: 3,
+    player: 'Player',
+    ball: 'Ball',
+    input: 'Input',
 };
 
 SignalManager.update = (lastStepTime) => {
     SignalManager.processSignals();
     SignalManager.resetSignalLimitation([
-        SignalManager.signals.playerMoveRight,
-        SignalManager.signals.playerMoveLeft,
+        SignalManager.signalTypes.playerMoveRight,
+        SignalManager.signalTypes.playerMoveLeft,
     ])
 };
 
 SignalManager.registerObject = (object) => {
-    switch (object.name) {
+    switch (object.constructor.name) {
         case SignalManager.objectNames.player:
             SignalManager.player = object;
             break;
@@ -57,10 +56,10 @@ SignalManager.processSignal = (signal) => {
     if (!SignalManager.processSignalLimitations(signal))
         return;
     switch (signal.signal) {
-        case SignalManager.signals.playerMoveLeft:
+        case SignalManager.signalTypes.playerMoveLeft:
             SignalManager.player.moveLeft();
             break;
-        case SignalManager.signals.playerMoveRight:
+        case SignalManager.signalTypes.playerMoveRight:
             SignalManager.player.moveRight();
             break;
     }
@@ -107,8 +106,8 @@ SignalManager.resetSignalLimitation = (signals) => {
     });
 }
 
-SignalManager.signalLimitationsRules.push({signal: SignalManager.signals.playerMoveRight, count: 1});
-SignalManager.signalLimitationsRules.push({signal: SignalManager.signals.playerMoveLeft, count: 1});
+SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveRight, count: 1});
+SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveLeft, count: 1});
 
 
 
