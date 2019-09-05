@@ -1,7 +1,7 @@
 class Input extends GameObject {
     constructor() {
         super();
-        this.name = Signal.objectNames.input;
+        this.name = SignalManager.objectNames.input;
         this.KeyboardKeyCodes = {
             left: 'Numpad4',
             up: 'Numpad8',
@@ -13,10 +13,10 @@ class Input extends GameObject {
     keypress(event) {
         switch (event.code) {
             case this.KeyboardKeyCodes.left:
-                this.dispatchSignal(new Signal(Signal.destinations.player, Signal.signals.playerMoveLeft));
+                this.dispatchSignal(new Signal(SignalManager.destinations.player, SignalManager.signals.playerMoveLeft));
                 break;
             case this.KeyboardKeyCodes.right:
-                this.dispatchSignal(new Signal(Signal.destinations.player, Signal.signals.playerMoveRight));
+                this.dispatchSignal(new Signal(SignalManager.destinations.player, SignalManager.signals.playerMoveRight));
                 break;
         }
     }

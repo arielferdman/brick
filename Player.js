@@ -3,41 +3,20 @@ class Player extends GameObject {
 
     constructor(position, dimensions, color) {
         super();
-        this.name = Signal.objectNames.player;
+        this.name = SignalManager.objectNames.player;
         this.x = position.x;
         this.y = position.y;
         this.w = dimensions.w;
         this.h = dimensions.h;
         this.color = color;
         this.moveGap = 20;
-        this.signalLimitationsRules = [{
-          signal: Signal.signals.playerMoveRight, count: 1
-        }];
         this.drawArguments = [this.x, this.y, this.w, this.h];
     }
 
 
     update(lastStepTime) {
         super.update(lastStepTime);
-        this.resetSignalLimitation([
-            Signal.signals.playerMoveRight,
-            Signal.signals.playerMoveLeft,
-        ])
-        this.processSignals();
         this.drawArguments = [this.x, this.y, this.w, this.h];
-    }
-
-    processSignal(signal) {
-        if (!this.processSignalLimitations(signal))
-            return;
-        switch (signal.signal) {
-            case Signal.signals.playerMoveLeft:
-                this.moveLeft();
-                break;
-            case Signal.signals.playerMoveRight:
-                this.moveRight();
-                break;
-        }
     }
 
     draw() {
