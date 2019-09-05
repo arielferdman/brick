@@ -52,6 +52,7 @@ function createInput() {
     let input = new Input();
     signalManager.registerObject(input);
     objects.push(input);
+    this.addEventListener('keypress', this.keypress);
 }
 
 function createPlayer() {
@@ -67,6 +68,9 @@ function clearCanvas() {
     ctx.clearRect(0,0, canvas.width, canvas.height)
 }
 
+function keypress(event) {
+    signalManager.input.keypress(event);
+}
 
 
 

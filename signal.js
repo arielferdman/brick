@@ -5,6 +5,7 @@ class Signal extends GameObject {
         this.signal = signal;
         this.player = null;
         this.ball = null;
+        this.input = null;
     }
 
     registerObject(object) {
@@ -15,6 +16,10 @@ class Signal extends GameObject {
             case Signal.objectNames.ball:
                 this.ball = object;
                 break;
+            case Signal.objectNames.input:
+                this.input = object;
+                break;
+
         }
     }
 
@@ -39,10 +44,13 @@ Signal.signals = {
 
 Signal.destinations = {
     player: this.player,
+    ball: this.ball,
+    input: this.input,
 };
 
 Signal.objectNames = {
     object: 0,
     player: 1,
     ball: 2,
+    input: 3,
 }

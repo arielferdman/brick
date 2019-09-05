@@ -1,16 +1,13 @@
 class Input extends GameObject {
     constructor() {
         super();
-        this.name = 'input';
+        this.name = Signal.objectNames.input;
         this.KeyboardKeyCodes = {
             left: 'Numpad4',
             up: 'Numpad8',
             right: 'Numpad6',
             down: 'Numpad2'
         };
-        this.currentKeyPress = '';
-        document.addEventListener('keypress', this.keypress);
-        document.addEventListener('keyup', this.keyRelease);
     }
 
     keypress(event) {
@@ -22,9 +19,5 @@ class Input extends GameObject {
                 this.dispatchSignal(new Signal(Signal.destinations.player, Signal.signals.playerMoveRight));
                 break;
         }
-    }
-
-    keyRelease() {
-        this.currentKeyPress = '';
     }
 }
