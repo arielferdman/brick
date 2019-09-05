@@ -1,4 +1,4 @@
-let canvas,ctx,objects,signalManager;
+let canvas, ctx, objects = [], signalManager;
 
 let signals = new Que();
 
@@ -39,7 +39,7 @@ function createObjectsByOrder() {
 }
 
 function createBall() {
-    let ball = new Ball(100, 75, 12, 0, 2 * Math.PI);
+    let ball = new Ball(100, 75, 12, 0, 2 * Math.PI, 'black');
     signalManager.registerObject(ball);
     objects.push(ball);
 }

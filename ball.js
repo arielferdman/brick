@@ -1,11 +1,12 @@
 class Ball extends GameObject {
-    constructor(x,y,r,as,ae) {
+    constructor(x,y,r,as,ae,color) {
         super();
         this.x = x;
         this.y = x;
         this.r = r;
         this.as = as;
         this.ae = ae;
+        this.color = color;
         this.ballVelocity = {x: 0, y: 0};
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
     }
@@ -17,7 +18,7 @@ class Ball extends GameObject {
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
     }
 
-    draw() {
+    draw(color) {
         super.draw();
         ctx.strokeStyle = color;
         ctx.beginPath();
