@@ -23,12 +23,6 @@ SignalManager.signalTypes = {
     playerMoveRight: 1,
 };
 
-SignalManager.destinations = {
-    player: SignalManager.player,
-    ball: SignalManager.ball,
-    input: SignalManager.input,
-};
-
 SignalManager.objectNames = {
     object: 0,
     player: 1,
@@ -95,6 +89,7 @@ SignalManager.processSignalLimitations = (signal) => {
                 }
             });
     });
+    return true;
 }
 
 SignalManager.resetSignalLimitation = (signals) => {

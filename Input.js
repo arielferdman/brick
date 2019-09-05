@@ -13,10 +13,10 @@ class Input extends GameObject {
     keypress(event) {
         switch (event.code) {
             case this.KeyboardKeyCodes.left:
-                this.dispatchSignal(new Signal(SignalManager.destinations.player, SignalManager.signals.playerMoveLeft));
+                this.dispatchSignal(new Signal(SignalManager.signalTypes.playerMoveLeft));
                 break;
             case this.KeyboardKeyCodes.right:
-                this.dispatchSignal(new Signal(SignalManager.destinations.player, SignalManager.signals.playerMoveRight));
+                this.dispatchSignal(new Signal(SignalManager.signalTypes.playerMoveRight));
                 break;
         }
     }
