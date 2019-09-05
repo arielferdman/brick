@@ -2,17 +2,6 @@ let canvas,ctx,objects,signalManager;
 
 let signals = new Que();
 
-let ballDrawArguments = [100, 75, 12, 0, 2 * Math.PI];
-let ballDrawArgNames = {
-    x:  0,
-    y:  1,
-    r:  2,
-    as: 3,
-    ae: 4
-}
-
-let ballVelocity = {x: 0, y: 0};
-
 window.onload = () => {
         canvas = document.getElementById('GameBoard');
         canvas.width = 800;
@@ -29,14 +18,16 @@ function frame() {
     window.requestAnimationFrame(frame);
 }
 
-function moveBall() {
-    ballDrawArguments[ballDrawArgNames.x] += Math.floor(ballVelocity.x);
-    ballDrawArguments[ballDrawArgNames.y] += Math.floor(ballVelocity.y);
-}
-
 function update() {
     objects.forEach((item) => {
         item.update();
+    });
+}
+
+function draw() {
+    clearCanvas();
+    objects.forEach((item) => {
+        item.draw();
     });
 }
 
@@ -49,10 +40,12 @@ function createObjectsByOrder() {
 
 function createBall() {
     let ball = new Ball(100, 75, 12, 0, 2 * Math.PI);
+    signalManager.registerObject(ball);
+    objects.push(ball);
 }
 
 function createSignal() {
-    let signalManager = new Signal();
+    signalManager = new Signal();
 }
 
 function createInput() {
@@ -70,25 +63,9 @@ function createPlayer() {
     objects.push(player);
 }
 
-function draw() {
-    clearCanvas();
-    objects.forEach((item) => {
-        item.draw();
-    });
-}
-
 function clearCanvas() {
     ctx.clearRect(0,0, canvas.width, canvas.height)
 }
-
-function drawBall(color, drawArguments) {
-    ctx.strokeStyle = color;
-    ctx.beginPath();
-    ctx.arc(...drawArguments);
-
-    ctx.stroke();
-}
-
 
 
 

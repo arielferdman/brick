@@ -4,12 +4,16 @@ class Signal extends GameObject {
         this.destination = destination;
         this.signal = signal;
         this.player = null;
+        this.ball = null;
     }
 
     registerObject(object) {
         switch (object.name) {
             case Signal.objectNames.player:
                 this.player = object;
+                break;
+            case Signal.objectNames.ball:
+                this.ball = object;
                 break;
         }
     }
@@ -40,4 +44,5 @@ Signal.destinations = {
 Signal.objectNames = {
     object: 0,
     player: 1,
+    ball: 2,
 }
