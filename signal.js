@@ -1,4 +1,4 @@
-class Signal extends Object {
+class Signal extends GameObject {
     constructor(destination, signal) {
         super();
         this.destination = destination;
@@ -14,13 +14,12 @@ class Signal extends Object {
         }
     }
 
-    update() {
-        processSignals();
+    update(lastStepTime) {
+        super.update(lastStepTime);
     }
 
     processSignal(signal) {
-        if (!this.processSignalLimitations(signal))
-            return;
+        super.processSignal(signal);
         switch (signal.destination) {
             case Signal.destinations.player:
                 this.player.receiveSignal(signal);

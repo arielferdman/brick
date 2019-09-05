@@ -1,4 +1,5 @@
-class Player extends Object {
+class Player extends GameObject {
+    signalLimitationsRules;
 
     constructor(position, dimensions, color) {
         super();
@@ -9,14 +10,15 @@ class Player extends Object {
         this.h = dimensions.h;
         this.color = color;
         this.moveGap = 20;
-        this.signals = new Que();
         this.signalLimitationsRules = [{
           signal: Signal.signals.playerMoveRight, count: 1
         }];
+        this.drawArguments = [this.x, this.y, this.w, this.h];
     }
 
 
-    update() {
+    update(lastStepTime) {
+        super.update(lastStepTime);
         this.resetSignalLimitation([
             Signal.signals.playerMoveRight,
             Signal.signals.playerMoveLeft,

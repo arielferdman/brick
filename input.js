@@ -1,4 +1,4 @@
-class Input extends Object {
+class Input extends GameObject {
     constructor() {
         super();
         this.name = 'input';
@@ -11,10 +11,6 @@ class Input extends Object {
         this.currentKeyPress = '';
         document.addEventListener('keypress', this.keypress);
         document.addEventListener('keyup', this.keyRelease);
-    }
-
-    receiveSignal(signal) {
-
     }
 
     keypress(event) {

@@ -29,31 +29,30 @@ function frame() {
     window.requestAnimationFrame(frame);
 }
 
-function applyGravityToBall() {
-    ballVelocity.y += 0.2;
-}
-
 function moveBall() {
     ballDrawArguments[ballDrawArgNames.x] += Math.floor(ballVelocity.x);
     ballDrawArguments[ballDrawArgNames.y] += Math.floor(ballVelocity.y);
 }
 
 function update() {
-    applyGravityToBall();
-    moveBall();
     objects.forEach((item) => {
         item.update();
     });
 }
 
 function createObjectsByOrder() {
-    createEventManager();
+    createSignal();
     createInput();
     createPlayer();
+    createBall();
 }
 
-function createEventManager() {
-    signalManager = new SignalManager();
+function createBall() {
+    let ball = new Ball(100, 75, 12, 0, 2 * Math.PI);
+}
+
+function createSignal() {
+    let signalManager = new Signal();
 }
 
 function createInput() {

@@ -1,4 +1,4 @@
-class Object {
+class GameObject {
 
     constructor() {
         this.name = Signal.objectNames.object;
