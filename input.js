@@ -18,9 +18,14 @@ class Input extends Object {
     }
 
     keypress(event) {
-        this.eventData['keyCode'] = event.code;
-        let signal = new Signal(enums.signals.keypress, event.code);
-        eventManager.receiveSignal(signal);
+        switch (event.code) {
+            case this.KeyboardKeyCodes.left:
+                this.dispatchSignal(new Signal(Signal.destinations.player, Signal.signals.playerMoveLeft));
+                break;
+            case this.KeyboardKeyCodes.right:
+                this.dispatchSignal(new Signal(Signal.destinations.player, Signal.signals.playerMoveRight));
+                break;
+        }
     }
 
     keyRelease() {

@@ -2,29 +2,40 @@ class Player extends Object {
 
     constructor(position, dimensions, color) {
         super();
-        this.name = 'player';
+        this.name = Signal.objectNames.player;
         this.x = position.x;
         this.y = position.y;
         this.w = dimensions.w;
         this.h = dimensions.h;
         this.color = color;
         this.moveGap = 20;
-        this.moveFlag = false;
-        this.signals = [];
+        this.signals = new Que();
+        this.signalLimitationsRules = [{
+          signal: Signal.signals.playerMoveRight, count: 1
+        }];
     }
 
+
     update() {
-        switch (currentKeyPress) {
-            case KeyboardKeyCodes.left:
-                movePlayer(KeyboardKeyCodes.left);
-                currentKeyPress = '';
+        this.resetSignalLimitation([
+            Signal.signals.playerMoveRight,
+            Signal.signals.playerMoveLeft,
+        ])
+        this.processSignals();
+        this.drawArguments = [this.x, this.y, this.w, this.h];
+    }
+
+    processSignal(signal) {
+        if (!this.processSignalLimitations(signal))
+            return;
+        switch (signal.signal) {
+            case Signal.signals.playerMoveLeft:
+                this.moveLeft();
                 break;
-            case KeyboardKeyCodes.right:
-                movePlayer(KeyboardKeyCodes.right);
-                currentKeyPress = '';
+            case Signal.signals.playerMoveRight:
+                this.moveRight();
                 break;
         }
-        this.drawArguments = [this.x, this.y, this.w, this.h];
     }
 
     draw() {
@@ -45,15 +56,3 @@ class Player extends Object {
     }
 }
 
-
-
-function movePlayer(direction) {
-    switch (direction) {
-        case KeyboardKeyCodes.left:
-
-            break;
-        case KeyboardKeyCodes.right:
-
-            break;
-    }
-}

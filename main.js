@@ -1,4 +1,6 @@
-let canvas,ctx,objects,eventManager,enums;
+let canvas,ctx,objects,signalManager;
+
+let signals = new Que();
 
 let ballDrawArguments = [100, 75, 12, 0, 2 * Math.PI];
 let ballDrawArgNames = {
@@ -45,23 +47,18 @@ function update() {
 }
 
 function createObjectsByOrder() {
-    createEnums();
     createEventManager();
     createInput();
     createPlayer();
 }
 
-function createEnums() {
-    enums = new Enums();
-}
-
 function createEventManager() {
-    eventManager = new EventManager();
+    signalManager = new SignalManager();
 }
 
 function createInput() {
     let input = new Input();
-    eventManager.registerObject(input);
+    signalManager.registerObject(input);
     objects.push(input);
 }
 
@@ -70,7 +67,7 @@ function createPlayer() {
     let dimensions = {w: 140, h: 30};
     let color = 'black';
     let player = new Player(position, dimensions, color);
-    eventManager.registerObject(player);
+    signalManager.registerObject(player);
     objects.push(player);
 }
 
@@ -91,14 +88,6 @@ function drawBall(color, drawArguments) {
     ctx.arc(...drawArguments);
 
     ctx.stroke();
-}
-
-function keypress(event) {
-    currentKeyPress = event.code;
-}
-
-function keyRelease() {
-    currentKeyPress = '';
 }
 
 
