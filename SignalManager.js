@@ -35,6 +35,7 @@ SignalManager.update = (lastStepTime) => {
         SignalManager.signalTypes.playerMoveRight,
         SignalManager.signalTypes.playerMoveLeft,
     ])
+    console.log(SignalManager.signals.length);
 };
 
 SignalManager.registerObject = (object) => {

@@ -1,6 +1,8 @@
 class Que {
     constructor() {
         this.head = null;
+        this.len = 0;
+        this.length = this.getLength();
     }
 
     push(element) {
@@ -14,6 +16,7 @@ class Que {
                 current = current.next;
             current.next = queNode;
         }
+        this.len++;
     }
 
     pop() {
@@ -21,6 +24,7 @@ class Que {
             return null;
         let head = this.head;
         this.head = this.head.next;
+        this.len--;
         return head.element;
     }
 
@@ -28,5 +32,9 @@ class Que {
         if (this.head === null)
             return true;
         return false;
+    }
+
+    getLength() {
+        return this.len;
     }
 }

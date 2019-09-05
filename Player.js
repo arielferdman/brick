@@ -26,13 +26,15 @@ class Player extends GameObject {
     }
 
     moveRight() {
-        if (this.x + this.w + this.moveGap <= canvas.offsetWidth)
-            this.x += this.moveGap;
+        this.x += this.moveGap;
+        if (this.x + this.w > canvas.width)
+            this.x = canvas.width - this.w - 1;
     }
 
     moveLeft() {
-        if (this.x >= canvas.offsetLeft)
-            this.x -= this.moveGap;
+        this.x -= this.moveGap;
+        if (this.x < 0)
+            this.x = 1;
     }
 }
 
