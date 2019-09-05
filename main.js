@@ -46,6 +46,7 @@ function createBall() {
 
 function createSignal() {
     signalManager = new Signal();
+    objects.push(signalManager);
 }
 
 function createInput() {
