@@ -16,6 +16,7 @@ class Ball extends GameObject {
         this.applyGravity();
         this.move();
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
+        CollisionDetector.updateBallCenterPoint(new Point(this.x, this.y));
     }
 
     draw() {

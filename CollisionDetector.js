@@ -6,11 +6,17 @@ CollisionDetector.ballRadi = null;
 CollisionDetector.playerTopLinePoints = null;
 CollisionDetector.canvasBorders = null;
 
-CollisionDetector.updatePlayerTopLine = (pointA, pointB) => {
-  CollisionDetector.playerTopLine = {
-    'pointA': pointA,
-    'pointB': pointB,
-  };
+CollisionDetector.updatePlayerTopLine = (line) => {
+  CollisionDetector.playerTopLine = line;
+};
+
+CollisionDetector.updateBallCenterPoint = (ballCenterPoint) => {
+  CollisionDetector.ballCenterPoint = ballCenterPoint;
+};
+
+CollisionDetector.registerBall = (ballCenterPoint, ballRadi) => {
+  CollisionDetector.ballCenterPoint = ballCenterPoint;
+  CollisionDetector.ballRadi = ballRadi;
 };
 
 CollisionDetector.calculateSlopeAngleWithTwoPoints = (pointA, pointB) => {
@@ -32,15 +38,19 @@ CollisionDetector.DistanceBetweenTwoPoints = (line) => {
     return Math.sqrt(Math.pow(line.pointB.x - line.pointA.x, 2) + Math.pow(line.pointB.y - line.pointA.y, 2));
 };
 
+CollisionDetector.getCollisionAxis = (line, ballCenter) => {
+
+};
+
 CollisionDetector.Collision = (line, ballCenter) => {
    let ballLineDistance = CollisionDetector.calculateHypotenuse(line, ballCenter) *
                           Math.sin(
                             CollisionDetector.calculateInnerTriangleAngle(line, ballCenter)
                           );
    if (CollisionDetector.ballRadi >= ballLineDistance)
-       return true;
+       return new Collision(true, CollisionDetector.getCollisionAxis(line, ballCenter));
    else
-       return false;
+       return new Collision(false, null);
 };
 
 
