@@ -16,6 +16,7 @@ class Player extends GameObject {
     update(lastStepTime) {
         super.update(lastStepTime);
         this.drawArguments = [this.x, this.y, this.w, this.h];
+        this.dispatchSignal(new Signal(SignalManager.signalTypes.updatePlayerTopLine, this.getTopLine()));
     }
 
     draw() {
@@ -35,6 +36,10 @@ class Player extends GameObject {
         this.x -= this.moveGap;
         if (this.x < 0)
             this.x = 1;
+    }
+
+    getTopLine() {
+        return new Line(new Point(this.x, this.y + this.h), new Point(this.x + this.w, this.y + this.h));
     }
 }
 

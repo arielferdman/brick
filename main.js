@@ -1,7 +1,5 @@
 let canvas, ctx, objects = [], lines = [];
 
-let signals = new Que();
-
 window.onload = () => {
         canvas = document.getElementById('GameBoard');
         canvas.width = 800;

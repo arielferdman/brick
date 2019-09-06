@@ -1,6 +1,7 @@
 class Signal extends GameObject {
-    constructor(signal) {
+    constructor(signal, signalData = null) {
         super();
         this.signal = signal;
+        this.signalData = null;
     }
 }

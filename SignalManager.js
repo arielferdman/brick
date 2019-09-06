@@ -21,6 +21,8 @@ SignalManager.signalLimitationsCount = [];
 SignalManager.signalTypes = {
     playerMoveLeft: 0,
     playerMoveRight: 1,
+    updateBallCenterPoint: 2,
+    updatePlayerTopLine: 3,
 };
 
 SignalManager.objectNames = {
@@ -56,14 +58,37 @@ SignalManager.registerObject = (object) => {
 SignalManager.processSignal = (signal) => {
     if (!SignalManager.processSignalLimitations(signal))
         return;
-    switch (signal.signal) {
-        case SignalManager.signalTypes.playerMoveLeft:
-            SignalManager.player.moveLeft();
-            break;
-        case SignalManager.signalTypes.playerMoveRight:
-            SignalManager.player.moveRight();
-            break;
-    }
+    // switch (signal.signal) {
+    //     case SignalManager.signalTypes.playerMoveLeft:
+    //         SignalManager.player.moveLeft();
+    //         break;
+    //     case SignalManager.signalTypes.playerMoveRight:
+    //         SignalManager.player.moveRight();
+    //         break;
+    //     case SignalManager.signalTypes.updateBallCenterPoint:
+    //         CollisionDetector.updateBallCenterPoint(signal.signalData);
+    //         break;
+    //     case SignalManager.signalTypes.updatePlayerTopLine:
+    //         CollisionDetector.updatePlayerTopLine(signal.signalData);
+    //         break;
+    // }
+    SignalManager.signalHandlers[signal.signal](signal);
+};
+
+SignalManager.movePlayerLeft = (signal = null) => {
+    SignalManager.player.moveLeft();
+};
+
+SignalManager.movePlayerRight = (signal = null) => {
+    SignalManager.player.moveRight();
+};
+
+SignalManager.updateBallCenterPoint = (signal) => {
+    CollisionDetector.updateBallCenterPoint(signal.signalData);
+};
+
+SignalManager.updatePlayerTopLine = (signal) => {
+    CollisionDetector.updatePlayerTopLine(signal.signalData);
 };
 
 SignalManager.processSignals = () => {
@@ -110,6 +135,13 @@ SignalManager.resetSignalLimitation = (signals) => {
 SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveRight, count: 1});
 SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveLeft, count: 1});
 
+// find a better way to do this maybe?
+SignalManager.signalHandlers = {
+    0: SignalManager.movePlayerLeft,
+    1: SignalManager.movePlayerRight,
+    2: SignalManager.updateBallCenterPoint,
+    3: SignalManager.updatePlayerTopLine,
+};
 
 
 
