@@ -1,4 +1,4 @@
-let canvas, ctx, objects = [];
+let canvas, ctx, objects = [], lines = [];
 
 let signals = new Que();
 

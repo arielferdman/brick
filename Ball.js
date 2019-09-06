@@ -18,9 +18,9 @@ class Ball extends GameObject {
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
     }
 
-    draw(color) {
+    draw() {
         super.draw();
-        ctx.strokeStyle = color;
+        ctx.strokeStyle = this.color;
         ctx.beginPath();
         ctx.arc(...this.drawArguments);
         ctx.stroke();
@@ -35,3 +35,30 @@ class Ball extends GameObject {
         this.y += Math.floor(this.ballVelocity.y);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
