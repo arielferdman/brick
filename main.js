@@ -1,5 +1,10 @@
 let canvas, ctx, objects = [], lines = [];
 
+// for debug purpose
+let startTime = Date.now();
+let gameElapsedTime = 0;
+// for debug purpose
+
 window.onload = () => {
         canvas = document.getElementById('GameBoard');
         canvas.width = 800;
@@ -10,6 +15,7 @@ window.onload = () => {
 };
 
 function frame() {
+    gameElapsedTime = Date.now() - startTime;
     update();
     draw();
 
@@ -21,6 +27,7 @@ function update() {
         item.update();
     });
     SignalManager.update();
+    CollisionDetector.update();
 }
 
 function draw() {
@@ -51,7 +58,7 @@ function createInput() {
 }
 
 function createPlayer() {
-    let position = {x: 30, y: 700};
+    let position = {x: 70, y: 700};
     let dimensions = {w: 140, h: 30};
     let color = 'black';
     let player = new Player(position, dimensions, color);

@@ -7,7 +7,7 @@ class Ball extends GameObject {
         this.as = as;
         this.ae = ae;
         this.color = color;
-        this.ballVelocity = {x: 0, y: 0};
+        this.ballVelocity = {x: 1, y: 6};
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
     }
 
@@ -28,12 +28,20 @@ class Ball extends GameObject {
     }
 
     applyGravity() {
-        this.ballVelocity.y += 0.2;
+        // this.ballVelocity.y += 0.2;
     }
 
     move() {
         this.x += Math.floor(this.ballVelocity.x);
         this.y += Math.floor(this.ballVelocity.y);
+    }
+
+    switchXAxis() {
+        this.ballVelocity.x *= -1;
+    }
+
+    switchYAxis() {
+        this.ballVelocity.y *= -1;
     }
 }
 

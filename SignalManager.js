@@ -18,13 +18,6 @@ SignalManager.signalLimitationsRules = [];
 
 SignalManager.signalLimitationsCount = [];
 
-SignalManager.signalTypes = {
-    playerMoveLeft: 0,
-    playerMoveRight: 1,
-    updateBallCenterPoint: 2,
-    updatePlayerTopLine: 3,
-};
-
 SignalManager.objectNames = {
     player: 'Player',
     ball: 'Ball',
@@ -91,6 +84,14 @@ SignalManager.updatePlayerTopLine = (signal) => {
     CollisionDetector.updatePlayerTopLine(signal.signalData);
 };
 
+SignalManager.switchBallXAxis = (signal = null) => {
+    SignalManager.ball.switchXAxis();
+};
+
+SignalManager.switchBallYAxis = (signal = null) => {
+    SignalManager.ball.switchYAxis();
+};
+
 SignalManager.processSignals = () => {
     let startTime = Date.now();
     let currentTime = Date.now();
@@ -132,8 +133,14 @@ SignalManager.resetSignalLimitation = (signals) => {
     });
 }
 
-SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveRight, count: 1});
-SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveLeft, count: 1});
+SignalManager.signalTypes = {
+    playerMoveLeft: 0,
+    playerMoveRight: 1,
+    updateBallCenterPoint: 2,
+    updatePlayerTopLine: 3,
+    switchBallXAxis: 4,
+    switchBallYAxis: 5,
+};
 
 // find a better way to do this maybe?
 SignalManager.signalHandlers = {
@@ -141,8 +148,12 @@ SignalManager.signalHandlers = {
     1: SignalManager.movePlayerRight,
     2: SignalManager.updateBallCenterPoint,
     3: SignalManager.updatePlayerTopLine,
+    4: SignalManager.switchBallXAxis,
+    5: SignalManager.switchBallYAxis,
 };
 
+SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveRight, count: 1});
+SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveLeft, count: 1});
 
 
 
