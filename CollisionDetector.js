@@ -2,22 +2,45 @@ class CollisionDetector {
 
 }
 
+CollisionDetector.init = () => {
+    CollisionDetector.registerCanvasLines();
+};
+
 CollisionDetector.update = () => {
   CollisionDetector.findAndHandleCollisions();
 };
 
 CollisionDetector.findAndHandleCollisions = () => {
   CollisionDetector.findAndHandleBallPlayerCollision();
+  CollisionDetector.findAndHandleBallCanvasEdgesCollision();
 };
 
 CollisionDetector.findAndHandleBallPlayerCollision = () => {
-    let collision = CollisionDetector.Collision(CollisionDetector.playerTopLine, CollisionDetector.ballCenterPoint);
-    if (collision.isCollision === true)
-        if (collision.collisionAxis === Collision.axes.x)
+    CollisionDetector.handleCollision(
+        CollisionDetector.playerTopLine,
+        CollisionDetector.ballCenterPoint);
+};
+
+CollisionDetector.findAndHandleBallCanvasEdgesCollision = () => {
+    let stop;
+    if (gameElapsedTime > 3500)
+        stop = '';
+    CollisionDetector.canvasBorders.forEach((canvasBorderLine) => {
+       CollisionDetector.handleCollision(
+           canvasBorderLine,
+           CollisionDetector.ballCenterPoint);
+    });
+};
+
+CollisionDetector.handleCollision = (line, ballCenterPoint) => {
+    let collision = CollisionDetector.Collision(line, ballCenterPoint);
+    if (collision.isCollision === true) {
+        if (collision.collisionAxis === Collision.axes.xFromRight || 
+            collision.collisionAxis === Collision.axes.xFromLeft)
             CollisionDetector.dispatchSignal(new Signal(SignalManager.signalTypes.switchBallXAxis));
         else
             CollisionDetector.dispatchSignal(new Signal(SignalManager.signalTypes.switchBallYAxis));
-
+    }
 };
 
 CollisionDetector.dispatchSignal = (signal) => {
@@ -27,7 +50,7 @@ CollisionDetector.dispatchSignal = (signal) => {
 CollisionDetector.ballCenterPoint = null;
 CollisionDetector.ballRadi = null;
 CollisionDetector.playerTopLinePoints = null;
-CollisionDetector.canvasBorders = null;
+CollisionDetector.canvasBorders = [];
 
 CollisionDetector.updatePlayerTopLine = (line) => {
   CollisionDetector.playerTopLine = line;
@@ -72,14 +95,24 @@ CollisionDetector.distanceBetweenTwoPoints = (pointA, pointB) => {
     return Math.sqrt(Math.pow(pointB.x - pointA.x, 2) + Math.pow(pointB.y - pointA.y, 2));
 };
 
-CollisionDetector.getCollisionAxis = (line) => {
-    if (line.pointB.x - line.pointA.x === 0)
-        return Collision.axes.x;
+CollisionDetector.getCollisionAxis = (line, ballCenter) => {
+    if (line.pointB.x - line.pointA.x === 0) {
+        if (ballCenter.x > line.pointA.x)
+            return Collision.axes.xFromLeft;
+        return Collision.axes.xFromRight;
+    }
+
     let slope = CollisionDetector.calculateLineSlope(line);
-    if (-1 < slope < 1)
-        return Collision.axes.x;
-    else
-        return Collision.axes.y;
+    if (-1 < slope && slope < 1) {
+        if (ballCenter.y > line.pointA.y)
+            return Collision.axes.yFromBot;
+        return Collision.axes.yFromTop;
+    }
+    else {
+        if (ballCenter.x > line.pointA.x)
+            return Collision.axes.xFromLeft;
+        return Collision.axes.xFromRight;
+    }
 };
 
 CollisionDetector.isLineHorizontalAndAboveTheBall = (line, ballCenter) => {
@@ -98,23 +131,34 @@ CollisionDetector.checkCollisionWhenBallWithinLineProjection = (line, ballCenter
     let hypotenuse = CollisionDetector.calculateHypotenuse(line, ballCenter);
     let innerTriangleAngle = CollisionDetector.calculateInnerTriangleAngle(line, ballCenter);
     if (innerTriangleAngle === 0)
-        return new Collision(false, null);
+        return new Collision(false);
     let ballLineDistance = hypotenuse * Math.sin(innerTriangleAngle);
     if (CollisionDetector.ballRadi >= ballLineDistance) {
-        CollisionDetector.alignBallFromCollision(ballLineDistance);
-        return new Collision(true, CollisionDetector.getCollisionAxis(line, ballCenter));
+        let CollisionAxis = CollisionDetector.getCollisionAxis(line, ballCenter);
+        CollisionDetector.alignBallFromCollision(ballLineDistance, CollisionAxis);
+        return new Collision(true, CollisionAxis, line.belongsTo);
     }
     else
-        return new Collision(false, null);
+        return new Collision(false);
 };
 
-CollisionDetector.alignBallFromCollision = (ballLineDistance) => {
-    let test = ballLineDistance - 1 - CollisionDetector.ballRadi;
+CollisionDetector.alignBallFromCollision = (ballLineDistance, CollisionAxis) => {
+    let alignDistance = ballLineDistance - 1 - CollisionDetector.ballRadi;
+    let x = 0;
+    let y = 0;
+    if (CollisionAxis === Collision.axes.xFromLeft)
+        x = alignDistance;
+    else if (CollisionAxis === Collision.axes.xFromRight)
+        x = -1 * alignDistance;
+    else if  (CollisionAxis === Collision.axes.yFromTop)
+        y = alignDistance;
+    else if (CollisionAxis === Collision.axes.yFromBot)
+        y = -1 * alignDistance;
     CollisionDetector.dispatchSignal(
         new Signal(SignalManager.signalTypes.alignBall,
             {
-                x: 0,
-                y: (ballLineDistance - 1 - CollisionDetector.ballRadi),
+                x: x,
+                y: y,
             }));
 };
 
@@ -126,8 +170,8 @@ CollisionDetector.findClosestLinePointXToBallX = (line, ballCenter) => {
 
 CollisionDetector.returnCollisionObject = (isCollision, line = null, ballCenter = null) => {
     if (isCollision)
-        return new Collision(true, CollisionDetector.getCollisionAxis(line, ballCenter));
-    return new Collision(false, null);
+        return new Collision(true, CollisionDetector.getCollisionAxis(line, ballCenter), line.belongsTo);
+    return new Collision(false);
 };
 
 CollisionDetector.checkCollisionOutSideOfLineProjection = (line, ballCenter) => {
@@ -141,11 +185,36 @@ CollisionDetector.checkCollisionOutSideOfLineProjection = (line, ballCenter) => 
 };
 
 CollisionDetector.Collision = (line, ballCenter) => {
-    if (gameElapsedTime >= 1650)
-        var s = '';
     if (CollisionDetector.isBallXWithinLineSegmentProjection(line, ballCenter))
         return CollisionDetector.checkCollisionWhenBallWithinLineProjection(line, ballCenter);
     return CollisionDetector.checkCollisionOutSideOfLineProjection(line, ballCenter);
+};
+
+CollisionDetector.registerCanvasLines = () => {
+    let bottomLine = new Line(
+        new Point(0, canvas.height),
+        new Point(canvas.width, canvas.height),
+        Collision.objects.canvasBotLine);
+
+    let leftLine = new Line(
+        new Point(0, canvas.height),
+        new Point(0 ,0),
+        Collision.objects.canvasLeftLine);
+
+    let topLine = new Line(
+        new Point(0, 0),
+        new Point(canvas.width, 0),
+        Collision.objects.canvasTopLine);
+
+    let rightLine = new Line(
+        new Point(canvas.width, 0),
+        new Point(canvas.width, canvas.height),
+        Collision.objects.canvasRightLine);
+
+    CollisionDetector.canvasBorders.push(bottomLine);
+    CollisionDetector.canvasBorders.push(leftLine);
+    CollisionDetector.canvasBorders.push(topLine);
+    CollisionDetector.canvasBorders.push(rightLine);
 };
 
 

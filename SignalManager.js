@@ -53,10 +53,10 @@ SignalManager.processSignal = (signal) => {
         return;
     // switch (signal.signal) {
     //     case SignalManager.signalTypes.playerMoveLeft:
-    //         SignalManager.player.moveLeft();
+    //         SignalManager.playerTopLine.moveLeft();
     //         break;
     //     case SignalManager.signalTypes.playerMoveRight:
-    //         SignalManager.player.moveRight();
+    //         SignalManager.playerTopLine.moveRight();
     //         break;
     //     case SignalManager.signalTypes.updateBallCenterPoint:
     //         CollisionDetector.updateBallCenterPoint(signal.signalData);

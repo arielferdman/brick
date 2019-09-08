@@ -5,12 +5,17 @@ let startTime = Date.now();
 let gameElapsedTime = 0;
 // for debug purpose
 
+function initCollisionDetector() {
+    CollisionDetector.init();
+}
+
 window.onload = () => {
         canvas = document.getElementById('GameBoard');
         canvas.width = 800;
         canvas.height = 800;
         ctx = canvas.getContext('2d');
         createObjectsByOrder();
+        initCollisionDetector();
         frame();
 };
 

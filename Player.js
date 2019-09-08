@@ -39,7 +39,7 @@ class Player extends GameObject {
     }
 
     getTopLine() {
-        return new Line(new Point(this.x, this.y), new Point(this.x + this.w, this.y));
+        return new Line(new Point(this.x, this.y), new Point(this.x + this.w, this.y), Collision.objects.playerTopLine);
     }
 }
 
