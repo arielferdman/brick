@@ -83,8 +83,13 @@ CollisionDetector.calculateLineSlope = (line) => {
 CollisionDetector.calculateInnerTriangleAngle = (line, ballCenter) => {
     let lineAngle = CollisionDetector.calculateSlopeAngleWithTwoPoints(line.pointA, line.pointB);
     let ballCenterLineStartAngle = CollisionDetector.calculateSlopeAngleWithTwoPoints(line.pointA, ballCenter);
-    if (lineAngle === Infinity)
+    // if (ballCenterLineStartAngle < 0)
+    //     ballCenterLineStartAngle =
+    if (lineAngle === Infinity) {
+        if (Math.PI - lineAngle > (Math.PI / 2))
+            lineAngle = lineAngle - (Math.PI / 2);
         return Math.abs(ballCenterLineStartAngle);
+    }
     return Math.abs(lineAngle - ballCenterLineStartAngle);
 };
 
