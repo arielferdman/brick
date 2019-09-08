@@ -23,7 +23,7 @@ CollisionDetector.findAndHandleBallPlayerCollision = () => {
 
 CollisionDetector.findAndHandleBallCanvasEdgesCollision = () => {
     let stop;
-    if (gameElapsedTime > 3500)
+    if (gameElapsedTime > 1500)
         stop = '';
     CollisionDetector.canvasBorders.forEach((canvasBorderLine) => {
        CollisionDetector.handleCollision(
@@ -83,7 +83,8 @@ CollisionDetector.calculateLineSlope = (line) => {
 CollisionDetector.calculateInnerTriangleAngle = (line, ballCenter) => {
     let lineAngle = CollisionDetector.calculateSlopeAngleWithTwoPoints(line.pointA, line.pointB);
     let ballCenterLineStartAngle = CollisionDetector.calculateSlopeAngleWithTwoPoints(line.pointA, ballCenter);
-
+    if (lineAngle === Infinity)
+        return Math.abs(ballCenterLineStartAngle);
     return Math.abs(lineAngle - ballCenterLineStartAngle);
 };
 
@@ -121,10 +122,26 @@ CollisionDetector.isLineHorizontalAndAboveTheBall = (line, ballCenter) => {
     return false;
 };
 
-CollisionDetector.isBallXWithinLineSegmentProjection = (line, ballCenter) => {
-    if (line.pointA.x <= ballCenter.x && ballCenter.x <= line.pointB.x)
+CollisionDetector.isHorizontalLine = (line) => {
+    if (line.pointA.y - line.pointB.y === 0)
         return true;
+    let slope = CollisionDetector.calculateLineSlope(line);
+    if (-1 < slope && slope < 1)
+        return true
     return false;
+};
+
+CollisionDetector.isBallXWithinLineSegmentProjection = (line, ballCenter) => {
+    if (CollisionDetector.isHorizontalLine(line)) {
+        if (line.pointA.x <= ballCenter.x && ballCenter.x <= line.pointB.x)
+            return true;
+        return false;
+    }
+    else {
+        if (line.pointA.y <= ballCenter.y && ballCenter.y <= line.pointB.y)
+            return true;
+        return false;
+    }
 };
 
 CollisionDetector.checkCollisionWhenBallWithinLineProjection = (line, ballCenter) => {

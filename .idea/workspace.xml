@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d867ae60-4e3e-4da6-bfcf-ea2fc8c70c10" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ball.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ball.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CollisionDetector.js" beforeDir="false" afterPath="$PROJECT_DIR$/CollisionDetector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SignalManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/SignalManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,20 +26,38 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+            <state relative-caret-position="222">
+              <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CollisionDetector.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="86" column="48" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CollisionDetector.js">
+        <entry file="file://$PROJECT_DIR$/Line.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="116" column="36" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="36" />
+            <state relative-caret-position="60">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Collision.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -49,17 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Ball.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="46" column="6" lean-forward="true" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Que.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+            <state relative-caret-position="200">
+              <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -85,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SignalManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="157" column="30" selection-start-line="157" selection-start-column="21" selection-end-line="157" selection-end-column="30" />
+            <state relative-caret-position="1125">
+              <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -94,17 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Player.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="84" selection-start-line="41" selection-start-column="84" selection-end-line="41" selection-end-column="84" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Input.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+            <state relative-caret-position="459">
+              <caret line="41" column="108" lean-forward="true" selection-start-line="41" selection-start-column="105" selection-end-line="41" selection-end-column="118" />
             </state>
           </provider>
         </entry>
@@ -140,6 +138,9 @@
       <find>Colli</find>
       <find>CollisionDetector</find>
       <find>sig</find>
+      <find>new Lin</find>
+      <find>new Coll</find>
+      <find>getCollisionAxis</find>
     </findStrings>
     <replaceStrings>
       <replace>SignalManager</replace>
@@ -169,15 +170,15 @@
         <option value="$PROJECT_DIR$/Input.js" />
         <option value="$PROJECT_DIR$/Que.js" />
         <option value="$PROJECT_DIR$/Point.js" />
-        <option value="$PROJECT_DIR$/Line.js" />
         <option value="$PROJECT_DIR$/main.html" />
-        <option value="$PROJECT_DIR$/Collision.js" />
         <option value="$PROJECT_DIR$/Signal.js" />
-        <option value="$PROJECT_DIR$/Player.js" />
         <option value="$PROJECT_DIR$/Ball.js" />
+        <option value="$PROJECT_DIR$/Line.js" />
+        <option value="$PROJECT_DIR$/Player.js" />
+        <option value="$PROJECT_DIR$/Collision.js" />
         <option value="$PROJECT_DIR$/SignalManager.js" />
-        <option value="$PROJECT_DIR$/CollisionDetector.js" />
         <option value="$PROJECT_DIR$/main.js" />
+        <option value="$PROJECT_DIR$/CollisionDetector.js" />
       </list>
     </option>
   </component>
@@ -283,21 +284,35 @@
       <option name="project" value="LOCAL" />
       <updated>1567923865453</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Collision is working now :O">
+      <created>1567929337671</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567929337671</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Collision With canvas borders is working now :O">
+      <created>1567941451880</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1567941451880</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45938000" />
+    <option name="totallyTimeSpent" value="51580000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24855188" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22432859" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32953367" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -341,7 +356,9 @@
     <MESSAGE value="progress with collision" />
     <MESSAGE value="progress with collision - more" />
     <MESSAGE value="lots of progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="lots of progress" />
+    <MESSAGE value="Collision is working now :O" />
+    <MESSAGE value="Collision With canvas borders is working now :O" />
+    <option name="LAST_COMMIT_MESSAGE" value="Collision With canvas borders is working now :O" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/enums.js" />
@@ -401,20 +418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Line.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Collision.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GameObject.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -436,20 +439,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="84" selection-start-line="41" selection-start-column="84" selection-end-line="41" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SignalManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="157" column="30" selection-start-line="157" selection-start-column="21" selection-end-line="157" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -457,24 +446,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ball.js">
+    <entry file="file://$PROJECT_DIR$/Line.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="46" column="6" lean-forward="true" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
+        <state relative-caret-position="60">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CollisionDetector.js">
+    <entry file="file://$PROJECT_DIR$/Player.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="116" column="36" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="36" />
+        <state relative-caret-position="459">
+          <caret line="41" column="108" lean-forward="true" selection-start-line="41" selection-start-column="105" selection-end-line="41" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ball.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Collision.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SignalManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        <state relative-caret-position="222">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CollisionDetector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="86" column="48" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="48" />
         </state>
       </provider>
     </entry>
