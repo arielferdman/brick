@@ -92,6 +92,10 @@ SignalManager.switchBallYAxis = (signal = null) => {
     SignalManager.ball.switchYAxis();
 };
 
+SignalManager.alignBall = (signal) => {
+  SignalManager.ball.align(signal.signalData.x, signal.signalData.y);
+};
+
 SignalManager.processSignals = () => {
     let startTime = Date.now();
     let currentTime = Date.now();
@@ -140,6 +144,7 @@ SignalManager.signalTypes = {
     updatePlayerTopLine: 3,
     switchBallXAxis: 4,
     switchBallYAxis: 5,
+    alignBall: 6,
 };
 
 // find a better way to do this maybe?
@@ -150,6 +155,7 @@ SignalManager.signalHandlers = {
     3: SignalManager.updatePlayerTopLine,
     4: SignalManager.switchBallXAxis,
     5: SignalManager.switchBallYAxis,
+    6: SignalManager.alignBall,
 };
 
 SignalManager.signalLimitationsRules.push({signal: SignalManager.signalTypes.playerMoveRight, count: 1});

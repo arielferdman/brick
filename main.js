@@ -28,6 +28,7 @@ function update() {
     });
     SignalManager.update();
     CollisionDetector.update();
+    SignalManager.update();
 }
 
 function draw() {

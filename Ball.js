@@ -43,6 +43,11 @@ class Ball extends GameObject {
     switchYAxis() {
         this.ballVelocity.y *= -1;
     }
+
+    align(x, y) {
+        this.x += x;
+        this.y += y;
+    }
 }
 
 
