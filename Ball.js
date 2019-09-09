@@ -7,7 +7,7 @@ class Ball extends GameObject {
         this.as = as;
         this.ae = ae;
         this.color = color;
-        this.ballVelocity = {x: -3, y: -6};
+        this.ballVelocity = {x: 3, y: 6};
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
     }
 

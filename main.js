@@ -50,8 +50,7 @@ function createObjectsByOrder() {
 }
 
 function createBall() {
-    // let ball = new Ball(100, 75, 12, 0, 2 * Math.PI, 'black');
-    let ball = new Ball(100, 675, 12, 0, 2 * Math.PI, 'black');
+    let ball = new Ball(100, 75, 12, 0, 2 * Math.PI, 'black');
     SignalManager.registerObject(ball);
     objects.push(ball);
     CollisionDetector.registerBall(ball)
