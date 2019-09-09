@@ -51,22 +51,7 @@ SignalManager.registerObject = (object) => {
 SignalManager.processSignal = (signal) => {
     if (!SignalManager.processSignalLimitations(signal))
         return;
-    // switch (signal.signal) {
-    //     case SignalManager.signalTypes.playerMoveLeft:
-    //         SignalManager.playerTopLine.moveLeft();
-    //         break;
-    //     case SignalManager.signalTypes.playerMoveRight:
-    //         SignalManager.playerTopLine.moveRight();
-    //         break;
-    //     case SignalManager.signalTypes.updateBallCenterPoint:
-    //         CollisionDetector.updateBallCenterPoint(signal.signalData);
-    //         break;
-    //     case SignalManager.signalTypes.updatePlayerTopLine:
-    //         CollisionDetector.updatePlayerTopLine(signal.signalData);
-    //         break;
-    // }
-    if (signal.signal === 4)
-        stop = '';
+
     SignalManager.signalHandlers[signal.signal](signal);
 };
 

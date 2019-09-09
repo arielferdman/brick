@@ -26,9 +26,6 @@ CollisionDetector.findAndHandleBallPlayerCollision = () => {
 };
 
 CollisionDetector.findAndHandleBallCanvasEdgesCollision = () => {
-    let stop;
-    if (gameElapsedTime > 1800)
-        stop = '';
     CollisionDetector.canvasBorders.forEach((canvasBorderLine) => {
        CollisionDetector.handleCollision(
            canvasBorderLine,
