@@ -7,10 +7,9 @@ class Collision {
 }
 
 Collision.axes = {
-    xFromLeft: 0,
-    xFromRight: 1,
-    yFromTop: 2,
-    yFromBot: 3,
+    switchX: 0,
+    switchY: 1,
+    switchBoth: 2,
 };
 
 Collision.objects = {
