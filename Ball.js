@@ -1,5 +1,5 @@
 class Ball extends GameObject {
-    constructor(x,y,r,as,ae,color) {
+    constructor(x, y, r, as, ae, color) {
         super();
         this.x = x;
         this.y = y;
@@ -45,18 +45,36 @@ class Ball extends GameObject {
     }
 
     switchBothAxes() {
-      this.switchXAxis();
-      this.switchYAxis();
+        this.switchXAxis();
+        this.switchYAxis();
     };
 
     align(x, y) {
         this.x += x;
         this.y += y;
     }
+
+    xDirection() {
+        if (this.ballVelocity.x > 0)
+            return Ball.directions.right;
+        else
+            return Ball.directions.left;
+    }
+
+    yDirection() {
+        if (this.ballVelocity.y > 0)
+            return Ball.directions.down;
+        else
+            return Ball.directions.up;
+    }
 }
 
-
-
+Ball.directions = {
+  right: 0,
+  left: 1,
+  up: 2,
+  down: 3,
+};
 
 
 

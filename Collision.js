@@ -1,8 +1,9 @@
 class Collision {
-    constructor(isCollision, collisionAxis = null, collisionObject = null) {
+    constructor(isCollision, collisionAxis = null, collisionObject = null, collisionDistance = null) {
         this.isCollision = isCollision;
         this.collisionAxis = collisionAxis;
         this.collisionObject = collisionObject;
+        this.collisionDistance= collisionDistance;
     }
 }
 

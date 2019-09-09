@@ -30,7 +30,7 @@ SignalManager.update = (lastStepTime) => {
         SignalManager.signalTypes.playerMoveRight,
         SignalManager.signalTypes.playerMoveLeft,
     ])
-    console.log(SignalManager.signals.length);
+    // console.log(SignalManager.signals.length);
 };
 
 SignalManager.registerObject = (object) => {
@@ -65,6 +65,8 @@ SignalManager.processSignal = (signal) => {
     //         CollisionDetector.updatePlayerTopLine(signal.signalData);
     //         break;
     // }
+    if (signal.signal === 4)
+        stop = '';
     SignalManager.signalHandlers[signal.signal](signal);
 };
 

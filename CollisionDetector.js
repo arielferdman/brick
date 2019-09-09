@@ -27,28 +27,50 @@ CollisionDetector.findAndHandleBallPlayerCollision = () => {
 
 CollisionDetector.findAndHandleBallCanvasEdgesCollision = () => {
     let stop;
-    if (gameElapsedTime > 1500)
+    if (gameElapsedTime > 1800)
         stop = '';
     CollisionDetector.canvasBorders.forEach((canvasBorderLine) => {
        CollisionDetector.handleCollision(
            canvasBorderLine,
-           CollisionDetector.ballCenterPoint);
+           CollisionDetector.ball);
     });
 };
 
 CollisionDetector.handleCollision = (line, ball) => {
-    let isCollision = CollisionDetector.isCollision(line, ball);
-    if (isCollision) {
+    let collision = CollisionDetector.isCollision(line, ball);
+    if (collision.isCollision) {
+        collision.collisionObject = line.belongsTo;
         let collisionAxes = CollisionDetector.getCollisionAxes(line);
         switch (collisionAxes) {
             case Collision.axes.switchX:
-                CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallXAxis);
+                collision.collisionAxis = collisionAxes;
+                CollisionDetector.alignBallFromCollision(
+                    line,
+                    ball,
+                    collision.collisionDistance,
+                    collision.collisionAxis
+                );
+                CollisionDetector.dispatchSignal(new Signal(SignalManager.signalTypes.switchBallXAxis));
                 break;
             case Collision.axes.switchY:
-                CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallYAxis);
+                collision.collisionAxis = collisionAxes;
+                CollisionDetector.alignBallFromCollision(
+                    line,
+                    ball,
+                    collision.collisionDistance,
+                    collision.collisionAxis
+                );
+                CollisionDetector.dispatchSignal(new Signal(SignalManager.signalTypes.switchBallYAxis));
                 break;
             case Collision.axes.switchBoth:
-                CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallXAxis);
+                collision.collisionAxis = collisionAxes;
+                CollisionDetector.alignBallFromCollision(
+                    line,
+                    ball,
+                    collision.collisionDistance,
+                    collision.collisionAxis
+                );
+                CollisionDetector.dispatchSignal(new Signal(SignalManager.signalTypes.switchBallXAxis));
                 break;
         }
     }
@@ -74,6 +96,8 @@ CollisionDetector.getCollisionAxes = (line) => {
     let slope = CollisionDetector.getSlope(line);
     if (slope === Infinity)
         return Collision.axes.switchX;
+    if (slope === 0)
+        return Collision.axes.switchY;
     if (-1 < slope && slope < 1) {
         return Collision.axes.switchBoth;
     }
@@ -92,18 +116,26 @@ CollisionDetector.getSlope = (line) => {
   return slope;
 };
 
-CollisionDetector.alignBallFromCollision = (ballLineDistance, CollisionAxis) => {
-    let alignDistance = ballLineDistance - 1 - CollisionDetector.ballRadi;
+CollisionDetector.alignBallFromCollision = (line, ball, ballLineDistance, collisionAxis) => {
+    let alignDistance = Math.abs(ballLineDistance - 1 - CollisionDetector.ball.r);
     let x = 0;
     let y = 0;
-    if (CollisionAxis === Collision.axes.xFromLeft)
-        x = alignDistance;
-    else if (CollisionAxis === Collision.axes.xFromRight)
-        x = -1 * alignDistance;
-    else if  (CollisionAxis === Collision.axes.yFromTop)
-        y = alignDistance;
-    else if (CollisionAxis === Collision.axes.yFromBot)
-        y = -1 * alignDistance;
+
+    if (collisionAxis === Collision.axes.switchX ||
+        collisionAxis === Collision.axes.switchBoth) {
+        if (ball.xDirection() === Ball.directions.left)
+            x = alignDistance;
+        else
+            x = -1 * alignDistance;
+    }
+
+    if (collisionAxis === Collision.axes.switchY ||
+        collisionAxis === Collision.axes.switchBoth) {
+        if (ball.yDirection() === Ball.directions.down)
+            y = -1 * alignDistance;
+        else
+            y = alignDistance;
+    }
     CollisionDetector.dispatchSignal(
         new Signal(SignalManager.signalTypes.alignBall,
             {
@@ -125,8 +157,8 @@ CollisionDetector.registerCanvasLines = () => {
         Collision.objects.canvasBotLine);
 
     let leftLine = new Line(
-        new Point(0, canvas.height),
-        new Point(0 ,0),
+        new Point(0, 0),
+        new Point(0 ,canvas.height),
         Collision.objects.canvasLeftLine);
 
     let topLine = new Line(
@@ -168,9 +200,10 @@ CollisionDetector.isCollision = (line, ball) => {
         CollisionDetector.distance({x: ball.x, y: ball.y}, {x: closestX, y: closestY});
 
     if (distanceOfCircleCenterToClosestPointOnLine <= ball.r)
-        return true;
+        return new Collision(true, null,
+                          null, distanceOfCircleCenterToClosestPointOnLine);
     else
-        return false;
+        return new Collision(false);
 };
 
 CollisionDetector.isPointInsideCircle = (point, ball) => {
