@@ -2,12 +2,12 @@ class Ball extends GameObject {
     constructor(x,y,r,as,ae,color) {
         super();
         this.x = x;
-        this.y = x;
+        this.y = y;
         this.r = r;
         this.as = as;
         this.ae = ae;
         this.color = color;
-        this.ballVelocity = {x: 1, y: 6};
+        this.ballVelocity = {x: -3, y: -6};
         this.drawArguments = [this.x, this.y, this.r, this.as, this.ae];
     }
 
