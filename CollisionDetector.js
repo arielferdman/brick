@@ -45,7 +45,7 @@ CollisionDetector.handleCollision = (line, ball) => {
                 CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallXAxis);
                 break;
             case Collision.axes.switchY:
-                CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallXAxis);
+                CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallYAxis);
                 break;
             case Collision.axes.switchBoth:
                 CollisionDetector.dispatchSignal(SignalManager.signalTypes.switchBallXAxis);
@@ -153,8 +153,8 @@ CollisionDetector.isCollision = (line, ball) => {
 
     let lineLength = CollisionDetector.distance(line.pointA, line.pointB);
 
-    let dotLineCircle = (((ball.center.x - line.pointA.x) * (line.pointB.x - line.pointA.x)) +
-        ((ball.center.y - line.pointA.y) * (line.pointB.y - line.pointA.y))) /
+    let dotLineCircle = (((ball.x - line.pointA.x) * (line.pointB.x - line.pointA.x)) +
+        ((ball.y - line.pointA.y) * (line.pointB.y - line.pointA.y))) /
         Math.pow(lineLength, 2);
 
 
@@ -165,17 +165,17 @@ CollisionDetector.isCollision = (line, ball) => {
         return false;
 
     let distanceOfCircleCenterToClosestPointOnLine =
-        CollisionDetector.distance(ball.center, {x: closestX, y: closestY});
+        CollisionDetector.distance({x: ball.x, y: ball.y}, {x: closestX, y: closestY});
 
-    if (distanceOfCircleCenterToClosestPointOnLine <= ball.radi)
+    if (distanceOfCircleCenterToClosestPointOnLine <= ball.r)
         return true;
     else
         return false;
 };
 
 CollisionDetector.isPointInsideCircle = (point, ball) => {
-    let distanceOfPointFromCircleCenter = CollisionDetector.distance(point, ball.center);
-    if (distanceOfPointFromCircleCenter <= ball.radi)
+    let distanceOfPointFromCircleCenter = CollisionDetector.distance(point, {x: ball.x, y: ball.y});
+    if (distanceOfPointFromCircleCenter <= ball.r)
         return true;
     return false;
 };
